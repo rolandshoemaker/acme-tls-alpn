@@ -140,17 +140,17 @@ The second assumption is that a server will not blindly agree to use the acme-tl
 
 Within the SMI-numbers registry, the "SMI Security for PKIX Certificate Extension (1.3.6.1.5.5.7.1)" table is to be updated to include the following entry:
 
-Decimal  Description                     References
--------  ------------------------------  ---------------------
-30       id-pe-acmeIdentifier            RFCXXXX
+| Decimal  | Description                    | References |
+|:---------|:------------------------------ |:-----------|
+| 30       | id-pe-acmeIdentifier           |  RFCXXXX   |
 
 ## ACME Validation Method
 
 The "ACME Validation Methods" registry is to be updated to include the following entry:
 
-Label        Identifier Type   Reference
------------  ----------------  ----------
-tls-alpn-01  dns               RFC XXXX
+| Label       | Identifier Type | Reference |
+|:------------|:----------------|:----------|
+| tls-alpn-01 | dns             | RFC XXXX  |
 
 # Appendix: Design Rationale
 
