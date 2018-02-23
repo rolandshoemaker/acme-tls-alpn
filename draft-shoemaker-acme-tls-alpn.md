@@ -78,11 +78,13 @@ HTTP/1.1 200 OK
 
 The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeValidation-v1 extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeValidation-v1 extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{I-D.ietf-acme-acme}} for the challenge. The acmeValidation extension MUST be critical so that the certificate isn't inadvertently used to make trust decisions.
 
+~~~~~~~~~~
 id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 30 }
 
 id-pe-acmeIdentifier-v1 OBJECT IDENTIFIER ::=  { id-pe-acmeIdentifier 1 }
 
 acmeValidation-v1 ::= OCTET STRING (SIZE (32))
+~~~~~~~~~~
 
 Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated.
 
