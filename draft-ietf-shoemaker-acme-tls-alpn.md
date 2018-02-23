@@ -76,7 +76,7 @@ HTTP/1.1 200 OK
 }
 ~~~~~~~~~~
 
-The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeValidation-v1 extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeValidation-v1 extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{draft-ietf-acme-acme}} for the challenge. The acmeValidation extension MUST be critical so that the certificate isn't inadvertently used to make trust decisions.
+The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeValidation-v1 extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeValidation-v1 extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{I-D.ietf-acme-acme}} for the challenge. The acmeValidation extension MUST be critical so that the certificate isn't inadvertently used to make trust decisions.
 
 id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 30 }
 
@@ -86,7 +86,7 @@ acmeValidation-v1 ::= OCTET STRING (SIZE (32))
 
 Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated. 
 
-When ready the client acknowledges this by sending a POST message containing the key authorization, as defined in draft-ietf-acme-acme section 8.1, to the challenge URL.
+When ready the client acknowledges this by sending a POST message containing the key authorization, as defined in {{I-D.ietf-acme-acme}} section 8.1, to the challenge URL.
 
 keyAuthorization (required, string):
 : The key authorization for this challenge.  This value MUST match the token
