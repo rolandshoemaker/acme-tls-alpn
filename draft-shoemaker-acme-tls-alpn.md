@@ -157,7 +157,3 @@ tls-alpn-01  dns               RFC XXXX
 The TLS ALPN challenge exists to replace the TLS SNI challenge defined in the original ACME document. This challenge allowed validation of domain control purely within the TLS layer which provided convenience for server operators who were either operating large TLS layer load balancing systems at which they wanted to perform validation or running servers fronting large numbers of DNS names from a single host.
 
 A security issue was discovered in the TLS SNI challenge which allowed users of certain service providers to illegitimately validate control of the DNS names of other users, as long as those users were also using those service providers. When the TLS SNI challenge was designed it was assumed that a user would only be able to claim TLS traffic via SNI for domain names they controlled (i.e. if User A registered Host A with a service provider they wouldn't be able to claim SNI traffic for Host B). This turns out not to be a security property provided by a number of large service providers. Because of this users were able to claim SNI traffic for the non-valid SNI names the TLS SNI challenge used to signal what was being validated to the server. This meant that if User A and User B had registered Host A and Host B respectively User A would be able to claim the SNI name for a validation for Host B and when the validation connection was made to the shared IP address that User A would be able to answer, proving control.
-
-# Acknowledgements
-
-stuff about people who did the good things
