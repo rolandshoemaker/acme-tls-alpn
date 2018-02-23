@@ -1,7 +1,7 @@
 ---
 title: "ACME TLS ALPN Challenge Extension"
 abbrev: ACME-TLS-ALPN
-docname: draft-shoemaker-acme-tls-alpn-latest
+docname: draft-ietf-shoemaker-acme-tls-alpn-latest
 category: std
 
 ipr: trust200902
