@@ -142,7 +142,7 @@ Within the SMI-numbers registry, the "SMI Security for PKIX Certificate Extensio
 
 | Decimal  | Description                    | References |
 |:---------|:------------------------------ |:-----------|
-| 30       | id-pe-acmeIdentifier           |  RFCXXXX   |
+| 30       | id-pe-acmeIdentifier           | RFC XXXX   |
 
 ## ACME Validation Method
 
