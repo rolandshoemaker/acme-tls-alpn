@@ -37,7 +37,7 @@ normative:
 
 --- abstract
 
-This document specifies XXX
+This document specifies a new challenge for the Automated Certificate Management Environment (ACME) protocol which allows for domain control validation using TLS.
 
 --- middle
 
@@ -84,7 +84,7 @@ id-pe-acmeIdentifier-v1 OBJECT IDENTIFIER ::=  { id-pe-acmeIdentifier 1 }
 
 acmeValidation-v1 ::= OCTET STRING (SIZE (32))
 
-Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated. 
+Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated.
 
 When ready the client acknowledges this by sending a POST message containing the key authorization, as defined in {{I-D.ietf-acme-acme}} section 8.1, to the challenge URL.
 
