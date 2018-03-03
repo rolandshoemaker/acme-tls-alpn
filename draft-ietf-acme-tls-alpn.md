@@ -43,7 +43,25 @@ This document specifies a new challenge for the Automated Certificate Management
 
 # Introduction
 
-The Automatic Certificate Management Environment (ACME) {{I-D.ietf-acme-acme}} specification doesn't specify a TLS layer validation method which limits the points at which validation can be performed. This document extends the ACME specification to include a TLS based validation method that uses the Application Level Protocol Negotiation extension.
+The Automatic Certificate Management Environment (ACME)
+{{I-D.ietf-acme-acme}} standard specifies methods for validating control
+of domain names via HTTP and DNS. Deployment experience has
+shown it is also useful to be able to validate domain control using TLS. In
+particular, this allows hosting providers, CDNs, and TLS-terminating load
+balancers to validate domain control without modifying the HTTP handling
+behavior of their backends. This separation of concerns can improve security.
+
+ACME drafts specified two TLS-based challenge types: TLS-SNI-01 and TLS-SNI-02.
+These were removed because they relied on assumptions about the deployed base
+of HTTP and HTTPS hosting providers that turned out not to be true. Those
+incorrect assumptions weakened the security of those methods.
+
+This document specifies a new TLS-based challenge type, TLS-ALPN-01. This
+challenge requires negotiating a new ALPN protocol. Because no existing
+providers implement this ALPN protocol, the ability to fulfill TLS-ALPN-01
+challenges is effectively opt-in. A service provider must proactively deploy new
+code in order to implement TLS-ALPN-01, so we can specify stronger controls in
+that code, resulting in a stronger validation method.
 
 # Terminology
 
