@@ -1,12 +1,12 @@
 ---
 title: "ACME TLS ALPN Challenge Extension"
 abbrev: ACME-TLS-ALPN
-docname: draft-shoemaker-acme-tls-alpn-latest
+docname: draft-ietf-acme-tls-alpn-latest
 category: std
 
 ipr: trust200902
 area: General
-# workgroup: ACME Working Group
+workgroup: ACME Working Group
 
 stand_alone: yes
 pi: [toc, sortrefs, symrefs]
