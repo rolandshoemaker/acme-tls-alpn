@@ -119,7 +119,7 @@ On receiving this the server MUST verify that the key authorization in the reque
 The server then verifies the client's control over the domain by verifying that the TLS server was configured as expected using these steps:
 
 1. Compute the expected SHA-256 [FIPS180-4] digest of the expected key authorization.
-2. Initiate a TLS connection with the domain name being validated, this connection MUST be sent to TCP port 443. The ClientHello that initiates the handshake MUST contain a ALPN extension with the value "acme-tls/1" and a Server Name Indication {{!RFC6066}} extension containing the domain name being validated.
+2. Initiate a TLS connection with the domain name being validated, this connection MUST be sent to TCP port 443. The ClientHello that initiates the handshake MUST contain a ALPN extension with a single protocol name "acme-tls/1" and a Server Name Indication {{!RFC6066}} extension containing the domain name being validated.
 3. Verify that the ServerHello contains a ALPN extension containing the value "acme-tls/1" and that the certificate returned contains a subjectAltName extension containing the dNSName being validated and no other entries and a critical acmeValidation extension containing the digest computed in step 1. The comparison of dNSNames MUST be case insensitive {{!RFC4343}}. Note that as ACME doesn't support Unicode identifiers all dNSNames MUST be encoded using the {{!RFC3492}} rules.
 
 If all of the above steps succeed then the validation is successful, otherwise it fails. Once the handshake has been completed the connection should be immediately closed and no further data should be exchanged.
