@@ -47,7 +47,7 @@ The Automatic Certificate Management Environment (ACME) {{I-D.ietf-acme-acme}} s
 
 ACME drafts specified two TLS-based challenge types: TLS-SNI-01 and TLS-SNI-02. These were removed because they relied on assumptions about the deployed base of HTTPS hosting providers that turned out not to be true. Those incorrect assumptions weakened the security of those methods.
 
-This document specifies a new TLS-based challenge type, TLS-ALPN-01. This challenge requires negotiating a new application-layer protocol. Because no existing providers implement this protocol, the ability to fulfill TLS-ALPN-01 challenges is effectively opt-in. A service provider must proactively deploy new code in order to implement TLS-ALPN-01, so we can specify stronger controls in that code, resulting in a stronger validation method.
+This document specifies a new TLS-based challenge type, TLS-ALPN-01. This challenge requires negotiating a new application-layer protocol using the TLS Application-Layer Protocol Negotiation (ALPN) Extension {{!RFC7301}}. Because no existing providers implement this protocol, the ability to fulfill TLS-ALPN-01 challenges is effectively opt-in. A service provider must proactively deploy new code in order to implement TLS-ALPN-01, so we can specify stronger controls in that code, resulting in a stronger validation method.
 
 # Terminology
 
@@ -57,7 +57,7 @@ interpreted as described in BCP 14, RFC 2119 {{RFC2119}}.
 
 # TLS with Application Level Protocol Negotiation (TLS ALPN) Challenge
 
-The TLS with Application Level Protocol Negotiation (TLS ALPN) validation method proves control over a domain name by requiring the client to configure a TLS server referenced by the DNS A and/or AAAA Resource Records for the domain name to respond to specific connection attempts utilizing the ALPN extension {{!RFC7301}}. The server validates control of the domain name by connecting to the TLS server and verifying a certificate with specific content is presented.
+The TLS with Application Level Protocol Negotiation (TLS ALPN) validation method proves control over a domain name by requiring the client to configure a TLS server referenced by the DNS A and/or AAAA Resource Records for the domain name to respond to specific connection attempts utilizing the ALPN extension. The server validates control of the domain name by connecting to the TLS server and verifying a certificate with specific content is presented.
 
 type (required, string):
 : The string "tls-alpn-01"
