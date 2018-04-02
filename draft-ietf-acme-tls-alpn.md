@@ -144,11 +144,19 @@ The second assumption is that a server will not blindly agree to use the acme-tl
 
 ## SMI Security for PKIX Certificate Extension OID
 
-Within the SMI-numbers registry, the "SMI Security for PKIX Certificate Extension (1.3.6.1.5.5.7.1)" table is to be updated to include the following entry:
+Within the SMI-numbers registry, the "SMI Security for PKIX Certificate Extension (1.3.6.1.5.5.7.1)" table is to be updated to add the following entry:
 
-| Decimal  | Description                    | References |
-|:---------|:------------------------------ |:-----------|
-| 30       | id-pe-acmeIdentifier           | RFC XXXX   |
+| Decimal  | Description          | References |
+|:---------|:---------------------|:-----------|
+| 30       | id-pe-acmeIdentifier | RFC XXXX   |
+
+## ALPN Protocol ID
+
+Within the Transport Layer Security (TLS) Extensions registry, the "Application-Layer Protocol Negotiation (ALPN) Protocol IDs" table is to be updated to add the following entry:
+
+| Protocol   | Identification Sequence                                          | Reference  |
+|:-----------|:-----------------------------------------------------------------|:-----------|
+| ACME-TLS/1 | 0x61 0x63 0x6d 0x65 0x2d 0x74 0x6c 0x73 0x2f 0x31 ("acme-tls/1") | RFC XXXX   |
 
 ## ACME Validation Method
 
