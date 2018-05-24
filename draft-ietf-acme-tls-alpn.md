@@ -129,7 +129,7 @@ The design of this challenges relies on some assumptions centered around how a s
 
 The first assumption is that when a server is being used to serve content for multiple DNS names from a single IP address that it properly segregates control of those names to the users that own them. This means that if User A registers Host A and User B registers Host B the server should not allow a TLS request using a SNI value for Host A to be served by User B or Host B to be served by User A. If the server allows User B to serve this request it allows them to illegitimately validate control of Host A to the ACME server.
 
-The second assumption is that a server will not violate {{!RFC7301}} by blindly agreeing to use the acme-tls/1 protocol without actually understanding it.
+The second assumption is that a server will not violate {{!RFC7301}} by blindly agreeing to use the "acme-tls/1" protocol without actually understanding it.
 
 To further mitigate the risk of users claiming domain names used by other users on the same infrastructure hosting providers, CDNs, and other service providers should not allow users to provide their own certificates for the TLS ALPN validation process. If providers wish to implement TLS ALPN validation they SHOULD only generate certificates used for validation themselves and not expose this functionality to users.
 
