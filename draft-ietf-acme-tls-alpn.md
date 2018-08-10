@@ -51,7 +51,7 @@ This document specifies a new TLS-based challenge type, TLS-ALPN-01. This challe
 
 # Terminology
 
-In this document, the key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" are to be interpreted as described in BCP 14, RFC 2119 {{RFC2119}}.
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{!RFC8174}} when, and only when, they appear in all capitals, as shown here.
 
 # TLS with Application Level Protocol Negotiation (TLS ALPN) Challenge
 
@@ -61,7 +61,7 @@ type (required, string):
 : The string "tls-alpn-01"
 
 token (required, string):
-: A random value that uniquely identifies the challenge. This value MUST have at least 128 bits of entropy. It MUST NOT contain any characters outside the base64url alphabet, including padding characters ("=").
+: A random value that uniquely identifies the challenge. This value MUST have at least 128 bits of entropy. It MUST NOT contain any characters outside the base64url alphabet, including padding characters ("="). See {{!RFC4086}} for additional information on randomness requirements.
 
 ~~~~~~~~~~
 GET /acme/authz/1234/1 HTTP/1.1
@@ -79,7 +79,7 @@ HTTP/1.1 200 OK
 The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeValidation-v1 extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeValidation-v1 extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{I-D.ietf-acme-acme}} for the challenge. The acmeValidation extension MUST be critical so that the certificate isn't inadvertently used by non-ACME software.
 
 ~~~~~~~~~~
-id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 30 }
+id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 31 }
 
 id-pe-acmeIdentifier-v1 OBJECT IDENTIFIER ::=  { id-pe-acmeIdentifier 1 }
 
@@ -88,7 +88,7 @@ acmeValidation-v1 ::= OCTET STRING (SIZE (32))
 
 Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated.
 
-A client responds with an empty object ({}) to acknowledge that the challenge is ready to be validated by the server.
+A client responds with an empty object ({}) to acknowledge that the challenge is ready to be validated by the server. The base64url encoding of the protected headers and payload is described in {{I-D.ietf-acme-acme}} Section 6.1.
 
 ~~~~~~~~~~
 POST /acme/authz/1234/1
@@ -134,6 +134,8 @@ The second assumption is that a server will not violate {{!RFC7301}} by blindly 
 To further mitigate the risk of users claiming domain names used by other users on the same infrastructure hosting providers, CDNs, and other service providers should not allow users to provide their own certificates for the TLS ALPN validation process. If providers wish to implement TLS ALPN validation they SHOULD only generate certificates used for validation themselves and not expose this functionality to users.
 
 # IANA Considerations
+
+[[RFC Editor: please replace XXXX below by the RFC number.]]
 
 ## SMI Security for PKIX Certificate Extension OID
 
