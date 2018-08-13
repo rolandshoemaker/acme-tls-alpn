@@ -143,7 +143,7 @@ Within the SMI-numbers registry, the "SMI Security for PKIX Certificate Extensio
 
 | Decimal  | Description          | References |
 |:---------|:---------------------|:-----------|
-| 30       | id-pe-acmeIdentifier | RFC XXXX   |
+| 31       | id-pe-acmeIdentifier | RFC XXXX   |
 
 ## ALPN Protocol ID
 
