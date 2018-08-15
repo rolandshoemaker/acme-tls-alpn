@@ -76,15 +76,17 @@ HTTP/1.1 200 OK
 }
 ~~~~~~~~~~
 
-The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeValidation-v1 extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeValidation-v1 extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{I-D.ietf-acme-acme}} for the challenge. The acmeValidation extension MUST be critical so that the certificate isn't inadvertently used by non-ACME software.
+The client prepares for validation by constructing a self-signed certificate which MUST contain a acmeIdentifier extension and a subjectAlternativeName extension {{!RFC5280}}. The subjectAlternativeName extension MUST contain a single dNSName entry where the value is the domain name being validated. The acmeIdentifier extension MUST contain the SHA-256 digest [FIPS180-4] of the key authorization {{I-D.ietf-acme-acme}} for the challenge. The acmeIdentifier extension MUST be critical so that the certificate isn't inadvertently used by non-ACME software.
+
+The acmeIdentifier extension has the following format:
 
 ~~~~~~~~~~
 id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 31 }
 
-id-pe-acmeIdentifier-v1 OBJECT IDENTIFIER ::=  { id-pe-acmeIdentifier 1 }
-
-acmeValidation-v1 ::= OCTET STRING (SIZE (32))
+Authorization ::= OCTET STRING (SIZE (32))
 ~~~~~~~~~~
+
+The extnValue of the id-pe-acmeIdentifier extension is the ASN.1 DER encoding of the Authorization structure.
 
 Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated.
 
@@ -115,7 +117,7 @@ The server then verifies the client's control over the domain by verifying that 
 1. Compute the expected SHA-256 digest of the expected key authorization.
 2. Resolve the domain name being validated and choose one of the IP addresses returned for validation (the server MAY validate against multiple addresses if more than one is returned, but this is not required).
 2. Initiate a TLS connection with the chosen IP address, this connection MUST use TCP port 443. The ClientHello that initiates the handshake MUST contain a ALPN extension with the single protocol name "acme-tls/1" and a Server Name Indication {{!RFC6066}} extension containing the domain name being validated.
-3. Verify that the ServerHello contains a ALPN extension containing the value "acme-tls/1" and that the certificate returned contains a subjectAltName extension containing the dNSName being validated and no other entries and a critical acmeValidation extension containing the digest computed in step 1. The comparison of dNSNames MUST be case insensitive {{!RFC4343}}. Note that as ACME doesn't support Unicode identifiers all dNSNames MUST be encoded using the {{!RFC3492}} rules.
+3. Verify that the ServerHello contains a ALPN extension containing the value "acme-tls/1" and that the certificate returned contains a subjectAltName extension containing the dNSName being validated and no other entries and a critical acmeIdentifier extension containing the digest computed in step 1. The comparison of dNSNames MUST be case insensitive {{!RFC4343}}. Note that as ACME doesn't support Unicode identifiers all dNSNames MUST be encoded using the {{!RFC3492}} rules.
 
 If all of the above steps succeed then the validation is successful, otherwise it fails. Once the TLS handshake has been completed the connection MUST be immediately closed and no further data should be exchanged.
 
