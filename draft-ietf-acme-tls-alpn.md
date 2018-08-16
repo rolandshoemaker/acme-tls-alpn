@@ -86,7 +86,7 @@ id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 31 }
 Authorization ::= OCTET STRING (SIZE (32))
 ~~~~~~~~~~
 
-The extnValue of the id-pe-acmeIdentifier extension is the ASN.1 DER encoding of the Authorization structure.
+The extnValue of the id-pe-acmeIdentifier extension is the ASN.1 DER encoding of the Authorization structure, which contains the SHA-256 digest of the key authorization for the challenge.
 
 Once this certificate has been created it MUST be provisioned such that it is returned during a TLS handshake that contains a ALPN extension containing the value "acme-tls/1" and a SNI extension containing the domain name being validated.
 
