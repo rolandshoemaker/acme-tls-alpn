@@ -42,6 +42,13 @@ normative:
       ins: International Telecommunication Union
     date: 2015
     target: https://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf
+  X.680:
+    title: "Information technology -- Abstract Syntax Notation One (ASN.1): Specification of basic notation"
+    author:
+      name: ITU-T
+      ins: International Telecommunication Union
+    date: 2015
+    target: https://www.itu.int/ITU-T/studygroups/com17/languages/X.680-0207.pdf
 
 --- abstract
 
@@ -81,7 +88,7 @@ The acmeIdentifier extension is identified by the id-pe-acmeIdentifier object id
 id-pe-acmeIdentifier OBJECT IDENTIFIER ::=  { id-pe 31 }
 ~~~~~~~~~~
 
-The extension has the following format:
+The extension has the following ASN.1 {{X.680}} format :
 
 ~~~~~~~~~~
 Authorization ::= OCTET STRING (SIZE (32))
